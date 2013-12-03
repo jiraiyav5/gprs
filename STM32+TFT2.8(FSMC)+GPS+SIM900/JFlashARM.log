@@ -1,0 +1,8 @@
+
+* 2009-01-20, 23:08:18
+RAM check failed @ address 0x20000088.
+Write: 0x1D00D1BA D1F74298
+Read: 0x1D00DEBA D1F74298
+(136 bytes of RAM have been checked successfully)
+Failed to erase sectors
+Failed to auto program target

@@ -1,0 +1,127 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;*******************************************************
+                       ***********************
+    2 00000000         ;
+    3 00000000         ;                               STARTUP CODE
+    4 00000000         ;                                 
+    5 00000000         ;                             KEIL's uVision3 
+    6 00000000         ;                   (RealView Microprocessor Developer K
+                       it)
+    7 00000000         ;
+    8 00000000         ; Filename      : init.s
+    9 00000000         ;*******************************************************
+                       ***********************
+   10 00000000         
+   11 00000000                 PRESERVE8
+   12 00000000                 AREA             INIT, CODE, READONLY ; Name thi
+                                                            s block of code    
+                                                                               
+                                                                        ;
+   13 00000000                 THUMB
+   14 00000000         
+   15 00000000         ;*******************************************************
+                       ***********************
+   16 00000000         ;                                  IMPORTS
+   17 00000000         ;*******************************************************
+                       ***********************
+   18 00000000         
+   19 00000000                 IMPORT           __main
+   20 00000000         
+   21 00000000         ;*******************************************************
+                       ***********************
+   22 00000000         ;                                  EXPORTS
+   23 00000000         ;*******************************************************
+                       ***********************
+   24 00000000         
+   25 00000000                 EXPORT           ResetHndlr
+   26 00000000         
+   27 00000000         ;*******************************************************
+                       ***********************
+   28 00000000         ;                                DEFINITIONS
+   29 00000000         ;*******************************************************
+                       ***********************
+   30 00000000         
+   31 00000000         
+   32 00000000         ;*******************************************************
+                       ***********************
+   33 00000000         ;                             PERFORM ROM/RAM REMAPPING
+   34 00000000         ;*******************************************************
+                       ***********************                
+   35 00000000         
+   36 00000000                 ENTRY
+   37 00000000         ResetHndlr
+   38 00000000         
+   39 00000000         ;*******************************************************
+                       ***********************
+   40 00000000         ;                              SETUP STACK POINTERS
+   41 00000000         ;*******************************************************
+                       ***********************
+   42 00000000         
+   43 00000000         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   44 00000000         ;*******************************************************
+                       ***********************
+   45 00000000         ;                                   MOVE TO MAIN
+   46 00000000         ;*******************************************************
+                       ***********************
+   47 00000000 4800            ldr              r0, =__main
+   48 00000002 4700            bx               r0          ; Save this in regi
+                                                            ster for possible l
+                                                            ong jump           
+                                                               ;
+   49 00000004         
+   50 00000004                 ALIGN
+   51 00000004                 END
+              00000000 
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\Output
+\init.d -o.\Output\init.o -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\INC\ST\STM3
+2F10x --list=.\Output\init.lst BSP\init.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+INIT 00000000
+
+Symbol: INIT
+   Definitions
+      At line 12 in file BSP\init.s
+   Uses
+      None
+Comment: INIT unused
+ResetHndlr 00000000
+
+Symbol: ResetHndlr
+   Definitions
+      At line 37 in file BSP\init.s
+   Uses
+      At line 25 in file BSP\init.s
+Comment: ResetHndlr used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 19 in file BSP\init.s
+   Uses
+      At line 47 in file BSP\init.s
+Comment: __main used once
+1 symbol
+328 symbols in table

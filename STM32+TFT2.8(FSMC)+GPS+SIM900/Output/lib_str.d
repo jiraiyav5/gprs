@@ -1,0 +1,11 @@
+.\Output\lib_str.o: uC-LIB\Source\lib_str.c
+.\Output\lib_str.o: .\uC-LIB\Source\lib_str.h
+.\Output\lib_str.o: .\uC-CPU\cpu.h
+.\Output\lib_str.o: .\uC-CPU\cpu_def.h
+.\Output\lib_str.o: .\uC-LIB\Source\lib_def.h
+.\Output\lib_str.o: .\APP\app_cfg.h
+.\Output\lib_str.o: D:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\Output\lib_str.o: D:\Keil\ARM\ARMCC\bin\..\include\ctype.h
+.\Output\lib_str.o: D:\Keil\ARM\ARMCC\bin\..\include\errno.h
+.\Output\lib_str.o: D:\Keil\ARM\ARMCC\bin\..\include\limits.h
+.\Output\lib_str.o: D:\Keil\ARM\ARMCC\bin\..\include\stdio.h
