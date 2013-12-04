@@ -1,5 +1,0 @@
--c --cpu Cortex-M3 -D__EVAL -g -O2 -Otime --apcs=interwork --split_sections -I. -I.\APP -I.\uCOS-II\Source -I.\uCOS-II\Ports -I.\uC-CPU -I.\FWL\inc -I.\uC-LIB\Source -I.\uC-LIB\Ports -I.\uC-OSView\Source -I.\uC-OSView\Ports -I.\BSP -I.\TFTDriver -I.\GSM -I.\GPS 
--I D:\Keil\ARM\RV31\INC 
--I D:\Keil\ARM\CMSIS\Include 
--I D:\Keil\ARM\Inc\ST\STM32F10x 
--o ".\Output\gsm_txd.o" --omf_browse ".\Output\gsm_txd.crf" --depend ".\Output\gsm_txd.d" "GSM\GSM_TXD.C"
