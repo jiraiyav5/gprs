@@ -3,3 +3,5 @@ Output/
 *.bak
 *.i
 *.dep
+*.asus
+*.uvgui*
