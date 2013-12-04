@@ -2,3 +2,4 @@ Output/
 *.o
 *.bak
 *.i
+*.dep
