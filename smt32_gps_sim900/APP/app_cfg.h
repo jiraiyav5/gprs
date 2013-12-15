@@ -10,10 +10,10 @@
 ※                                     功能模块开关
 ※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
 
-#define  OS_VIEW_MODULE        DEF_DISABLED	     	
+#define  OS_VIEW_MODULE        DEF_ENABLED	     	
 #define  GPS_MODULE						 DEF_ENABLED
 #define  GSM_MODULE						 DEF_ENABLED			
-#define  DEBUG_MODULE					 DEF_DISABLED		
+#define  DEBUG_MODULE					 DEF_ENABLED		
 #define	 TFT_MODULE						 DEF_ENABLED
 
 #define	 APP_USE_CNLib 				 	 DEF_DISABLED	  //汉字字库编译开关

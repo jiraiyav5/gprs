@@ -26,7 +26,7 @@ INT8U    Flag_CMGR=0;
 INT8U    Flag_DATA=0;
 
 extern INT8U    GPSinf[100];
-extern  const unsigned char GPSimage[153600];
+extern  const unsigned char GPSimage[10];
 
 static  void    GSM_InitOS(void);
 static  void    GSM_Task(void *p_arg);

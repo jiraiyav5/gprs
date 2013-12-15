@@ -11,6 +11,8 @@
 #include "includes.h"
 #include "GSM.h"
 #include "GSM_TypeDefine.h"
+//extern char app_buf[10] ;
+extern com_app_t com_app;
                                                                                                 
 #if GSM_MODULE == DEF_ENABLED                                                                                      
 
@@ -102,11 +104,12 @@ static  void  GSM_Task (void *p_arg)
 {
     //INT8U      err;
     INT16U  i=0;
+    char s[2];
 
     #ifdef  GSM_SUPPORT_LBS
     INT16U  LBS_REFRESH_COUNT=0;
     #endif
-    INT8U  INIT_FLAG=1,TP=0;
+    INT8U  INIT_FLAG=1,TP=0, buf_cnt = 0;
     ADXL345_Init();
     Key_Number_Init();
 
@@ -129,11 +132,25 @@ static  void  GSM_Task (void *p_arg)
         if(i==150 && INIT_FLAG) {
             LCD_SHOW_CN15x16_String(0,100,"初始化SIM900模块...");
             GSM_Configuration();
-            //GSM_GPRS_TCP_Connect("etmcu.xicp.net","5800");
+            GSM_GPRS_TCP_Connect("zillionlin.vicp.cc","11657");
             INIT_FLAG=0;
             //counter=0;
         }//开机后15秒，配置GSM模块
-      
+        //////////////////////////////////////////////////////
+        if(INIT_FLAG == 0)  {
+            while(buf_cnt < 3)  {
+                    if(com_app.buf_ok & (1<<buf_cnt))  {
+                        sprintf(s, "%x",buf_cnt);
+                        GSM_GPRS_SEND(s);
+                        GSM_GPRS_SEND(com_app.app_buf[buf_cnt]);
+                        com_app.buf_ok &= ~(1<<buf_cnt);
+                        com_app.app_buf[buf_cnt][0] = '\0';
+                    }
+                    buf_cnt++;
+            }
+            buf_cnt = 0;
+       }
+        ///////////////////////////////////////////////////////
         TP=Get_Temperature();//计算温度
 
 #if (TFT_MODULE == DEF_ENABLED)
@@ -232,20 +249,30 @@ static  void  GSM_Task (void *p_arg)
         { 
             BSP_RLED_ON();        //点亮LED灯
             TFT_ShowPicture(0,0,240,320,GPSimage);//显示背景图片,即清屏
-            GSM_GPRS_UDP_Connect("etmcu.xicp.net","5800");    //连接远程TCP服务器
-        //GSM_GPRS_TCP_Connect("117.83.54.228","5800");    //连接远程TCP服务器
+            // GSM_GPRS_UDP_Connect("etmcu.xicp.net","5800");    //连接远程TCP服务器
+            //GSM_GPRS_TCP_Connect("117.83.54.228","5800");    //连接远程TCP服务器
+            GSM_GPRS_TCP_Connect("zillionlin.vicp.cc","11657");
         }
         if( !Key_Right() )/*按右键 */ {
             BSP_RLED_OFF();    //熄灭LED灯
-            GSM_GPRS_SEND("$GPRMC,060525.491,A,3156.9445,N,12025.8057,E,0.59,181.00,200309,,,A*69");//发送测试数据
+            //GSM_GPRS_SEND("$GPRMC,060525.491,A,3156.9445,N,12025.8057,E,0.59,181.00,200309,,,A*69");//发送测试数据
+            GSM_GPRS_SEND("===================");
+            GSM_GPRS_SEND(com_app.app_buf[0]);
         }
         if( !Key_Up() )/*按上键 */ {
             GSM_Answer_CALL();    //来电时，按上键接听电话
+            GSM_GPRS_SEND(com_app.app_buf[1]);
         } 
         if( !Key_Down()  )/*按下键 */ {
+
+            USART_SendData(USART1 , com_app.com_cnt);
+
+           // USART_SendData(USART1 , com_app.buf_ok);
+            
+            GSM_GPRS_SEND(com_app.app_buf[0]);
             //while(!Key_Down());
             //GSM_Hang_UP();        //通话中，按下键挂断电话
-            GSM_Send_CN_MSG("8615990472896","你好！Hellow World!");//测试发送一条中英文混合的PDU短信
+            //GSM_Send_CN_MSG("8615990472896","你好！Hellow World!");//测试发送一条中英文混合的PDU短信
         }
     }//while(1) 
 }

@@ -16,6 +16,10 @@
 */
 
 #include <includes.h>
+//extern char app_buf[10] ;
+extern com_app_t com_app;
+char com_rev_tmp[3] = {'\0',};
+CPU_INT08U com_buf_cnt = 0;
 
 #if OS_VIEW_MODULE == DEF_ENABLED
 
@@ -299,6 +303,23 @@ static void  OSView_RxTxISRHandler (void)
     if (USART_GetITStatus(usart, USART_IT_RXNE) != RESET) 
 	{
         rx_data = USART_ReceiveData(usart) & 0xFF;              /* Read one byte from the receive data register         */
+        USART_SendData( USART1, rx_data);
+        ////////////////////////////////////////////
+        #if 1        
+        if(com_app.com_cnt == 10) {
+            com_app.buf_ok  =com_app.buf_ok | (1<<com_buf_cnt);
+            com_buf_cnt++;
+            if(com_buf_cnt == 3)  com_buf_cnt = 0;
+            com_app.com_cnt = 0;                
+        }
+       
+        sprintf(com_rev_tmp,"%x",rx_data);
+        strcat(com_app.app_buf[com_buf_cnt], com_rev_tmp);
+    
+        
+        com_app.com_cnt ++;
+        #endif
+        ////////////////////////////////////////////
         OSView_RxHandler(rx_data);
 
         USART_ClearITPendingBit(usart, USART_IT_RXNE);          /* Clear the USART1 Receive interrupt                   */

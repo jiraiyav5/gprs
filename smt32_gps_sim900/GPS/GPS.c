@@ -114,7 +114,7 @@ static  void  GPS_Task (void *p_arg)
 
 		#if (OS_VIEW_MODULE == DEF_ENABLED)
 		sprintf((char *)s, "\n%2d点%2d分%2d秒 纬度:%f 经度:%f 高度:%f\n", GPGGAData.Hour+8, GPGGAData.Minute, GPGGAData.Second, GPGGAData.Latitude, GPGGAData.Longitude, GPGGAData.Altitude);
-		OSView_TxStr(s, 0);
+		//OSView_TxStr(s, 0);
 		#endif
 
 		sprintf((char *)GPSinf, "http://ditu.google.cn/maps?q=%f,%f&t=h&z=17", GPGGAData.Latitude, GPGGAData.Longitude);

@@ -59,5 +59,12 @@
 #include "GSM.H"
 #endif
 
-
+//////
+typedef struct {
+    u16 buf_ok;
+    u16 com_cnt;    
+    char app_buf[3][512];
+    
+}com_app_t;
+//////
 #endif
